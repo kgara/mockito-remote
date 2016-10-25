@@ -9,6 +9,7 @@ import org.mockito.invocation.Invocation;
 import org.mockito.invocation.MockHandler;
 import org.mockito.mock.MockCreationSettings;
 import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.VoidMethodStubbable;
 
 class RemoteMockHandler<T> implements InternalMockHandler<T> {
 
@@ -31,9 +32,14 @@ class RemoteMockHandler<T> implements InternalMockHandler<T> {
     public MockCreationSettings getMockSettings() {
         return handler.getMockSettings();
     }
-    
+
     @Override
-    public void setAnswersForStubbing(List<Answer<?>> answers) {
+    public VoidMethodStubbable<T> voidMethodStubbable(T mock) {
+        return handler.voidMethodStubbable(mock);
+    }
+
+    @Override
+    public void setAnswersForStubbing(List<Answer> answers) {
         handler.setAnswersForStubbing(answers);
     }
 

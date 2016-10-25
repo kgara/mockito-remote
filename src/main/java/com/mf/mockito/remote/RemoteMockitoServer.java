@@ -98,7 +98,7 @@ public class RemoteMockitoServer implements HttpHandler {
     }
 
     private void setStubbedInvocationsOnMock(Object mock, List<StubbedInvocationMatcher> remoteStubbedInvocations) {
-        List<StubbedInvocationMatcher> stubbedInvocations = MockUtil.getMockHandler(mock).getInvocationContainer().getStubbedInvocations();
+        List<StubbedInvocationMatcher> stubbedInvocations = new MockUtil().getMockHandler(mock).getInvocationContainer().getStubbedInvocations();
 
         for (StubbedInvocationMatcher remoteStubbedInvocation : remoteStubbedInvocations) {
             Invocation invocation = remoteStubbedInvocation.getInvocation();
@@ -120,7 +120,7 @@ public class RemoteMockitoServer implements HttpHandler {
     }
 
     private byte[] serialiseInvocations(Object mock) {
-        List<Invocation> stubbings = MockUtil.getMockHandler(mock).getInvocationContainer().getInvocations();
+        List<Invocation> stubbings = new MockUtil().getMockHandler(mock).getInvocationContainer().getInvocations();
         return new XStream().toXML(stubbings).getBytes(Charset.forName("UTF8"));
     }
 }

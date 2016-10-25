@@ -25,7 +25,6 @@ class SerialisableInvocation implements Invocation, VerificationAwareInvocation,
     private boolean verified;
     private boolean ignoredForVerification;
     private StubInfo stubInfo;
-    private Class<?> rawReturnType;
 
     SerialisableInvocation(Invocation invocation) {
         this.sequenceNumber = invocation.getSequenceNumber();
@@ -36,7 +35,6 @@ class SerialisableInvocation implements Invocation, VerificationAwareInvocation,
         this.location = invocation.getLocation();
         this.verified = invocation.isVerified();
         this.ignoredForVerification = invocation.isIgnoredForVerification();
-        this.rawReturnType = invocation.getRawReturnType();
     }
 
     @Override
@@ -59,7 +57,7 @@ class SerialisableInvocation implements Invocation, VerificationAwareInvocation,
     }
 
     @Override
-    public <T> T getArgument(int i) {
+    public <T> T getArgumentAt(int i, Class<T> aClass) {
         return (T) arguments[i];
     }
 
@@ -133,8 +131,4 @@ class SerialisableInvocation implements Invocation, VerificationAwareInvocation,
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Class<?> getRawReturnType() {
-        return rawReturnType;
-    }
 }

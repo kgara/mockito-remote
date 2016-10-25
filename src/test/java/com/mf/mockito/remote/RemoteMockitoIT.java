@@ -18,7 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.example.Bar;
 import com.example.Foo;
 
-@RunWith(MockitoJUnitRunner.Silent.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RemoteMockitoIT {
 
     @Mock

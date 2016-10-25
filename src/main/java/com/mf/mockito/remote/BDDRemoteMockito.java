@@ -2,8 +2,6 @@ package com.mf.mockito.remote;
 
 import static org.mockito.BDDMockito.BDDStubber;
 
-import java.util.Arrays;
-
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
@@ -96,8 +94,9 @@ public class BDDRemoteMockito {
         }
 
         public BDDRemoteOngoingStubbing<T> willThrow(Class<? extends Throwable>... throwableClasses) {
-            if (throwableClasses.length == 1) return new BDDRemoteOngoingStubbing<T>(ongoingStubbing.thenThrow(throwableClasses[0]));
-            return new BDDRemoteOngoingStubbing<T>(ongoingStubbing.thenThrow(throwableClasses[0], Arrays.copyOfRange(throwableClasses, 1, throwableClasses.length)));
+            if (throwableClasses.length == 1)
+                return new BDDRemoteOngoingStubbing<T>(ongoingStubbing.thenThrow(throwableClasses[0]));
+            return new BDDRemoteOngoingStubbing<T>(ongoingStubbing.thenThrow(throwableClasses));
         }
 
         public BDDRemoteOngoingStubbing<T> willCallRealMethod() {
