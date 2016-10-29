@@ -12,7 +12,9 @@ public class JettyLauncher {
         context.setContextPath("/");
         server.setHandler(context);
 
-        context.addServlet(new ServletHolder(new SomeRemoteApp()), "/*");
+        MockingContext mockingContext = new MockingContext();
+        context.addServlet(new ServletHolder(new SomeRemoteApp(mockingContext)), "/one");
+        context.addServlet(new ServletHolder(new OtherRemoteApp(mockingContext)), "/other");
 
         server.start();
         server.join();
